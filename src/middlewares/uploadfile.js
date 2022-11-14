@@ -60,7 +60,7 @@ module.exports = (req, res, next) => {
         errorMessage = `File ${err.field} too large, max 50mb`;
       }
       res.json({
-        message: "Error"
+        message: err
       })
     } else {
       next();
