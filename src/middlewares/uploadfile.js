@@ -53,9 +53,6 @@ module.exports = (req, res, next) => {
     }
   ]);
   multerFields(req, res, (err) => {
-    // console.log('ini eror', err)
-    // console.log("req",req)
-    // console.log("res",res)
     if (err) {
         console.log(err)
       let errorMessage = err.message;
@@ -64,8 +61,6 @@ module.exports = (req, res, next) => {
       }
       res.json({
         err: err,
-        res: res,
-        req: req
       })
     } else {
       next();
