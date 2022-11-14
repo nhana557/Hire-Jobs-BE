@@ -6,7 +6,6 @@ const Router = require('./src/routes/index')
 // const worker = require('./src/routes/worker')
 const morgan = require('morgan')
 const createError = require('http-errors')
-const proxy = require('http-proxy-middleware')
 // const img = require('./images')
 
 
@@ -14,7 +13,6 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 app.use(cors())
 app.use(morgan('dev'))
-app.use('*', proxy({ target: apiEndpoint, changeOrigin: true }))
 app.use('/', Router)
 // app.use('/img', express.static(path.join(__dirname, './images')))
 app.use('/img', express.static('./images'))
