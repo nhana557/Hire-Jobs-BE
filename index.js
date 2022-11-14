@@ -20,7 +20,7 @@ app.use('/', Router)
 app.use('/img', express.static('./images'))
 
 app.all("*", (req, res, next) => {
-  next(createError());
+  next(createError("error guys"));
 });
 
 app.use((err, req, res, next) => {
