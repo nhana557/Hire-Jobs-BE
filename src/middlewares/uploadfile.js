@@ -53,6 +53,9 @@ module.exports = (req, res, next) => {
     }
   ]);
   multerFields(req, res, (err) => {
+    console.log('ini eror', err)
+    console.log("req",req)
+    console.log("res",res)
     if (err) {
         console.log(err)
       let errorMessage = err.message;
@@ -60,7 +63,9 @@ module.exports = (req, res, next) => {
         errorMessage = `File ${err.field} too large, max 50mb`;
       }
       res.json({
-        message: err
+        err: err,
+        res: res,
+        req: req
       })
     } else {
       next();
