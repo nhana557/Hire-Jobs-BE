@@ -11,12 +11,12 @@ Router.post('/login', authWorker.login)
     .post('/register', authWorker.register)
     .post('/refreshToken', authWorker.refreshToken)
     .post('changePassword', authWorker.changePasswordEmployee)
-    .put('/update-profile', 
-    protect,
-    authWorker.updateProfileEmployee)
     .put('/update-profile/img', 
     protect,
     upload,
     authWorker.updaterImgProfile)
+    .put('/update-profile', 
+    protect,
+    authWorker.updateProfileEmployee)
 
     module.exports = Router;
