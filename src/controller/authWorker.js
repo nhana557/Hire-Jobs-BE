@@ -191,11 +191,11 @@ const refreshToken = (req, res, next) => {
       }, 'success', 200);
     } catch (error) {
       console.log(error)
-      // commonHelper.response(res, {
-      //   code: 500,
-      //   payload: error.message,
-      //   message: 'Internal Server Error',
-      // });
+      commonHelper.response(res, {
+        code: 500,
+        payload: error.message,
+        message: 'Internal Server Error',
+      }, 'error', 500);
     }
   }
 
