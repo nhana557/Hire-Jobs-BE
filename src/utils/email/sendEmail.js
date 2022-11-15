@@ -30,9 +30,10 @@ const sendEmail = async (dataEmail) =>{
         })
         .catch(err => {return err})
 
-
+        return true;
     } catch (error) {
         console.log(error)
+        return error;
     }
 }
 

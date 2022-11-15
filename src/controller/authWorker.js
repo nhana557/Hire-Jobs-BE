@@ -45,7 +45,7 @@ const register = async (req, res, next) =>{
           }
           const emails = await sendEmail(templateEmail);
           console.log(emails)
-          if(!emails){
+          if(emails){
             await create(data)
             commonHelper.response(res, null, "Register Success, check email to Activate account", 201)
           }else{
