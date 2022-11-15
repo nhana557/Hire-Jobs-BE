@@ -34,7 +34,7 @@ const sendEmail = async (dataEmail) =>{
             secure: true, // true for 465, false for other ports
             auth: {
                 user: process.env.EMAIL_USER, // generated ethereal user
-                pass: 'asdfgyuiop09876' // generated ethereal password
+                pass: 'taoeqyuovqivguzd' // generated ethereal password
             }
             })
         transporter
