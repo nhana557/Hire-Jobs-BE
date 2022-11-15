@@ -43,7 +43,7 @@ const register = async (req, res, next) =>{
           subject: 'Activate Your Account!',
           html: activateAccountEmail(`http://localhost:${process.env.PORT}/authWorker/activation/${token}`)
         }
-        sendEmail(templateEmail);
+        await sendEmail(templateEmail);
         commonHelper.response(res, null, "Register Success, check email to Activate account", 201)
 
     } catch (error) {
