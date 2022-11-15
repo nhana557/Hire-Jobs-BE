@@ -16,8 +16,8 @@ app.use(express.urlencoded({extended: true}))
 app.use(cors({
   origin: '*'
 }))
-// app.use(xss())
-// app.use(helmet())
+app.use(xss())
+app.use(helmet())
 app.use(morgan('dev'))
 app.use('/', Router)
 // app.use('/img', express.static(path.join(__dirname, './images')))
