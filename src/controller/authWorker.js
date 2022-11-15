@@ -23,7 +23,8 @@ const register = async (req, res, next) =>{
 
         if(rowCount){
             return commonHelper.response(res, rowCount, 'user sudah terdaftar', 403)
-        }else{
+        }
+        // else{
           const data = {
               id: uuid4(),
               fullname,
@@ -34,16 +35,16 @@ const register = async (req, res, next) =>{
               token
           }
           console.log(data)
+          // }
+          
+          const templateEmail = {
+            from: `"Hire Jobs" <${process.env.EMAIL_FROM}>`,
+            to: req.body.email.toLowerCase(),
+            subject: 'Activate Your Account!',
+            html: activateAccountEmail(`http://localhost:${process.env.PORT}/authWorker/activation/${token}`)
+          }
+          await sendEmail(templateEmail);
           await create(data)
-        }
-
-        const templateEmail = {
-          from: `"Hire Jobs" <${process.env.EMAIL_FROM}>`,
-          to: req.body.email.toLowerCase(),
-          subject: 'Activate Your Account!',
-          html: activateAccountEmail(`http://localhost:${process.env.PORT}/authWorker/activation/${token}`)
-        }
-        await sendEmail(templateEmail);
         commonHelper.response(res, null, "Register Success, check email to Activate account", 201)
 
     } catch (error) {
