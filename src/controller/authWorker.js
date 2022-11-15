@@ -44,7 +44,8 @@ const register = async (req, res, next) =>{
             html: activateAccountEmail(`http://localhost:${process.env.PORT}/authWorker/activation/${token}`)
           }
           const emails = await sendEmail(templateEmail);
-          if(emails){
+          console.log(emails)
+          if(!emails){
             await create(data)
             commonHelper.response(res, null, "Register Success, check email to Activate account", 201)
           }else{

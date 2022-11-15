@@ -26,6 +26,7 @@ const sendEmail = async (dataEmail) =>{
         .then((info) =>{
             console.log('Email sended successfully.');
             console.log(info)
+            return info;
         })
         .catch(err => {return err})
 
