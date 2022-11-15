@@ -16,9 +16,9 @@ const sendEmail = async (dataEmail) =>{
     try {
         const accessToken = await oAuth2Client.getAccessToken();
         const transporter = nodemailer.createTransport({
-            service: 'smtp.gmail.com',
-            port: 456,
-            secure: true, 
+            service: 'gmail',
+            // port: 456,
+            // secure: true, 
             auth: {
                 type: 'OAuth2',
                 user: process.env.EMAIL_USER,
