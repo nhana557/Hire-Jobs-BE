@@ -12,7 +12,7 @@
 
 ## About The Project
 
-This is a Restful API repository for Shop Id. This Restful API is built using ExpressJS and PostgreSQL.
+This is a Restful API repository for Hire Jobs. This Restful API is built using ExpressJS and PostgreSQL.
 # List third party module
 | Thrid Party | npm install |
 | ------ | ------ |
