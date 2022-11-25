@@ -19,7 +19,10 @@ const register = async (req, res, next) =>{
         const { rowCount } = await findByEmail(email)
         const salt = bcrypt.genSaltSync(10)
         const passwordHash = bcrypt.hashSync(password, salt)
+        // use smpt
         const token = crypto.randomBytes(30).toString('hex');
+        //not use smpt
+        // const token = true
 
         if(rowCount){
             return commonHelper.response(res, rowCount, 'user sudah terdaftar', 403)
@@ -47,7 +50,10 @@ const register = async (req, res, next) =>{
           console.log(emails)
           if(emails){
             await create(data)
-            commonHelper.response(res, null, "Register Success, check email to Activate account", 201)
+            //use smpt
+            // commonHelper.response(res, null, "Register Success, check email to Activate account", 201)
+            // not use smpt
+            commonHelper.response(res, null, "Register Success, please login", 201)
           }else{
             commonHelper.response(res, null, "Register Success", 201)
 
