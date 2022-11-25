@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./readme/logo.svg" />
+  <img src="./readme/logo.svg" width="30%"/>
 </div>
 <h3 align="center">Hire Jobs API</h3>
 <p align="center">
