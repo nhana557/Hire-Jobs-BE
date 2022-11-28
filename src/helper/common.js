@@ -3,7 +3,7 @@ const response = (res, result, message, status, pagination) =>{
     resultRespon.status = 'success'
     resultRespon.statusCode = status || 200
     resultRespon.message = message || null
-    resultRespon.data = result
+    resultRespon.data = result || null
     if(pagination) resultRespon.pagination = pagination
     res.status(status).json(resultRespon)
 }

@@ -46,6 +46,6 @@ app.use((err, req, res, next) => {
 //     })
 //   })
 const PORT = process.env.PORT || 6000
-app.listen(PORT, () =>{
-    console.log(`server running at http://localhost:${PORT}`)
+app.listen(5500, () =>{
+    console.log(`server running at ${PORT}`)
 })

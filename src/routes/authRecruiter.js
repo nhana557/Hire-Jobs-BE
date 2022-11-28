@@ -8,6 +8,7 @@ Router
     .post('/login', authRecruiter.loginRecruiter)
     .post('/register', authRecruiter.registerRecruiter)
     .get('/profile',protect, authRecruiter.profil)
+    .get('/activation/:token', authRecruiter.activate)
     .post('/refreshToken', authRecruiter.refreshToken)
     .post('/changePassword', authRecruiter.changePassword)
     .put(

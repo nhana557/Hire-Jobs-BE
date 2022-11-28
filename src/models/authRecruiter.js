@@ -17,6 +17,33 @@ const authModel = {
             )
         })
     },
+    findByToken : (by, token) =>{
+        return new Promise((resolve, reject) =>{
+            db.query(
+                `SELECT * FROM recruiter WHERE ${by}= $1`, [token], 
+                (err, result) =>{
+                    if(!err){
+                        resolve(result)
+                    }else{
+                        reject(new Error(err))
+                    }
+                }
+            )
+        })
+    },
+    activateEmail: (id) =>{
+        return new Promise((resolve, reject) =>{
+            db.query(
+                `UPDATE recruiter SET active=true WHERE id=$1`,[id], (err, result) =>{
+                    if(!err){
+                        resolve(result)
+                    }else{
+                        reject(new Error(err))
+                    }
+                }
+            )
+        })
+    },
     create: ({
         id,
         fullname,
@@ -25,11 +52,12 @@ const authModel = {
         company,
         phonenumber,
         position,
-        role
+        role,
+        active
     }) =>{
         return new Promise ((resolve, reject) =>{
             db.query(
-                `INSERT INTO recruiter (id, fullname, password, email, company, phonenumber, position, role) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)`,
+                `INSERT INTO recruiter (id, fullname, password, email, company, phonenumber, position, role, active) VALUES ($1,$2,$3,$4,$5,$6,$7,$8, $9)`,
                 [
                     id,
                     fullname,
@@ -38,7 +66,8 @@ const authModel = {
                     company,
                     phonenumber,
                     position,
-                    role
+                    role, 
+                    active
                 ],
                 (err, result) =>{
                     if(!err){

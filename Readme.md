@@ -58,9 +58,30 @@ This is a Restful API repository for Hire Jobs. This Restful API is built using 
 
 - npm run lint
 
+
+## ENV
+```bash
+DB_USERNAME = 
+DB_HOST = 
+DB_DATABASE = 
+DB_PASSWORD = 
+DB_PORT = 
+PORT =
+SECRET_KEY_JWT =
+
+
+EMAIL_USER=
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+REDIRECT_URI=
+GMAIL_REFRESH_TOKEN=
+DRIVE_REFRESH_TOKEN=
+```
+
 ### Executing program
 
 - Run program with `npm run dev` for development and `npm run start` for production
+
 
 <!-- RELATED PROJECT -->
 
