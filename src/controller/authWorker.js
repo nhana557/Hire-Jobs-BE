@@ -44,7 +44,7 @@ const register = async (req, res, next) =>{
             from: `"Hire Jobs" <${process.env.EMAIL_FROM}>`,
             to: req.body.email.toLowerCase(),
             subject: 'Activate Your Account!',
-            html: activateAccountEmail(`${process.env.PORT}/authWorker/activation/${token}`)
+            html: activateAccountEmail(`${process.env.PORT_BACKEND}/authWorker/activation/${token}`)
           }
           const emails = await sendEmail(templateEmail);
           console.log(emails)

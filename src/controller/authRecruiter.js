@@ -96,7 +96,7 @@ const authRecruiter = {
                 from: `"Hire Jobs" <${process.env.EMAIL_FROM}>`,
                 to: req.body.email.toLowerCase(),
                 subject: 'Activate Your Account!',
-                html: activateAccountEmail(`${process.env.PORT}/authRecruiter/activation/${active}`)
+                html: activateAccountEmail(`${process.env.PORT_BACKEND}/authRecruiter/activation/${active}`)
             }
             if (rowCount) {
                 return common.response(res, rowCount, 'user sudah terdaftar', 403)
