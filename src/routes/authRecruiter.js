@@ -12,10 +12,15 @@ Router
     .post('/refreshToken', authRecruiter.refreshToken)
     .post('/changePassword', authRecruiter.changePassword)
     .put(
-        '/update-profile',
+        '/update-profile/img',
         protect,
         upload,
+        authRecruiter.updateImg
+    )
+    .put(
+        '/update-profile',
+        protect,
         authRecruiter.updateProfile
     )
-
+    
 module.exports = Router

@@ -79,6 +79,17 @@ const authModel = {
             )
         })
     },
+     updatePicture : (id, file) =>{
+        return new Promise((resolve, reject) =>{
+            db.query(`UPDATE recruiter SET image = $1 WHERE id=$2`,[file, id], (err, result) =>{
+                if(!err){
+                    resolve(result)
+                }else{
+                    reject(new Error(err))
+                }
+            })
+        })
+    },
     updateProfile: ({
         fullname,
         company,
@@ -88,7 +99,6 @@ const authModel = {
         company_field,
         address,
         company_description,
-        image,
         instagram,
         linkedin,
         id,
@@ -103,10 +113,9 @@ const authModel = {
                 company_field = COALESCE($6, company_field),
                 address = COALESCE($7, address),
                 company_description = COALESCE($8, company_description),
-                image = COALESCE($9, image),
-                instagram = COALESCE($10, instagram),
-                linkedin = COALESCE($11, linkedin)
-                WHERE id = $12
+                instagram = COALESCE($9, instagram),
+                linkedin = COALESCE($10, linkedin)
+                WHERE id = $11
                 `,
                 [
                     fullname,
@@ -117,7 +126,6 @@ const authModel = {
                     company_field,
                     address,
                     company_description,
-                    image,
                     instagram,
                     linkedin,
                     id,
@@ -125,6 +133,25 @@ const authModel = {
                 (err, result) =>{
                     if(!err){
                         resolve(result.rows)
+                    }else{
+                        reject(new Error(err))
+                    }
+                }
+            )
+        })
+    },
+    getProfile : (id) =>{
+        return new Promise((resolve, reject) =>{
+            db.query(
+                // `SELECT worker.id, worker.fullname, worker.email, worker.skill, worker.address, worker.
+                // description,worker.image, worker.jobs, portfolio.name_app, portfolio.repository, portfolio.type, experience.
+                // job_description, experience.month_year, experience.name_company, experience.
+                // position FROM worker FULL JOIN experience ON worker.id = experience.id_worker FULL JOIN portfolio ON worker.id = portfolio.id_worker WHERE worker.id = $1`,
+                `select * from recruiter where id=$1`,
+                [id],
+                (err, result) =>{
+                    if(!err){
+                        resolve(result)
                     }else{
                         reject(new Error(err))
                     }

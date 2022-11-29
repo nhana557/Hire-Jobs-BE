@@ -8,6 +8,9 @@ const { v4: uuid4 } = require('uuid')
 const jwt = require('jsonwebtoken')
 const authHelper = require('../helper/auth')
 const sendEmail = require('../utils/email/sendEmail')
+const uploadGoogleDrive = require('../utils/uploadGoogleDrive')
+const deleteGoogleDrive = require('../utils/deleteGoogleDrive')
+const deleteFile = require('../utils/delete')
 const activateAccountEmail = require('../utils/email/activateAccountEmail')
 
 
@@ -162,17 +165,69 @@ const authRecruiter = {
             console.log(token)
             const decoded = jwt.verify(token, process.env.SECRET_KEY)
             console.log(decoded)
-            const {
-                rows: [user]
-            } = await authModel.findEmail(decoded.email)
-            console.log(user)
+            const user = await authModel.getProfile(decoded.id)
+            console.log(user.rows)
             delete user.password
-            common.response(res, user, `Profile ${user.fullname}`, 200)
+            common.response(res, user.rows, `Profile ${user.fullname}`, 200)
         } catch (error) {
             console.log(error)
             // next(createError)
         }
     },
+    updateImg : async(req, res, next) =>{
+        try {
+          const email = req.decoded.email;
+          console.log(email)
+          const user = await authModel.findEmail(email);
+          console.log(user)
+          // jika user tidak ditemukan
+          if (!user.rowCount) {
+            // hapus jika ada upload photo
+            if (req.files) {
+              if (req.files.image) {
+                deleteFile(req.files.image[0].path);
+              }
+            }
+    
+            return common.response(res, null , "update Profile failed", 404);
+          }
+    
+          let { image } = user.rows[0];
+          console.log(image)
+          // console.log(user.rows[0])
+          // jika ada upload photo
+          console.log(req.files)
+          if (req.files) {
+            if (req.files.image) {
+              // menghapus image sebelumnya di gd jika sebelumnya sudah pernah upload
+              console.log(req.files.image)
+              if (user.rows[0].image) {
+                await deleteGoogleDrive(user.rows[0].image);
+              }
+              // upload photo baru ke gd
+              console.log("ini image", req.files.image[0].path)
+              image = await uploadGoogleDrive(req.files.image[0]);
+              // menghapus image setelah diupload ke gd
+              deleteFile(req.files.image[0].path);
+            }
+          }
+          console.log(image, 'ini id' )
+          await authModel.updatePicture(user.rows[0].id, image.id);
+    
+          common.response(res, {
+            code: 200,
+            payload: null,
+            message: 'Update Photo Success',
+          }, 'success', 200);
+        } catch (error) {
+          console.log(error.message)
+          common.response(res, {
+            code: 500,
+            payload: error.message,
+            message: 'Internal Server Error',
+          }, 'error', 200);
+        }
+      },
     updateProfile: async (req, res, next) => {
         try {
             const id = req.decoded.id
@@ -188,11 +243,7 @@ const authRecruiter = {
                 phonenumber,
                 company,
                 // position
-            } = req.body
-            console.log(address)
-            console.log(req.file)
-            const picture = req.files.image[0].filename
-            console.log(picture)
+            } = req.body;
             // const ress = await cloudinary.uploader.upload(picture)
             const data = {
                 // fullname,
@@ -200,7 +251,6 @@ const authRecruiter = {
                 address,
                 company_description,
                 email,
-                image: `http://localhost:5500/img/${picture}`,
                 instagram,
                 linkedin,
                 phonenumber,

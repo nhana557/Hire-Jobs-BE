@@ -99,7 +99,7 @@ const login = async (req, res, next) => {
       const {
         rows: [user]
       } = await findByEmail(email)
-      // console.log(user)
+      console.log(user)
       // console.log(user.token_verify)
       if (!user) {
         return commonHelper.response(
@@ -285,7 +285,7 @@ const refreshToken = (req, res, next) => {
       const id = decoded.id
       // console.log("ini adalah id", id)
       const result = await getProfile(id)
-      // console.log(result)
+      console.log(result)
   
       commonHelper.response(res, result.rows, 'Get profil data success', 200)
     } catch (error) {

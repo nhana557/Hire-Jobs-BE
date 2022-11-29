@@ -14,7 +14,9 @@ const multerUpload = multer({
     //   }
     // },
     filename: (req, file, cb) => {
-      const name = crypto.randomBytes(30).toString('hex');
+      const date = new Date()
+      const random = crypto.randomBytes(30).toString('hex');
+      const name = `${date.toLocaleString().split(", ")[1].split(":").join("-")}-${random}`
       const ext = path.extname(file.originalname);
       const filename = `${name}${ext}`;
       cb(null, filename);

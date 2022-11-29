@@ -9,7 +9,7 @@ exports.getWorker = async(req, res, next) =>{
         const sortby = req.query.sortby || 'fullname'
         const sort = req.query.sort || 'asc'
         const search = req.query.search || ''
-        const searchby = req.query.searchby || 'jobs'
+        const searchby = req.query.searchby || 'fullname' || 'jobs'
         console.log(offset)
         const { rows: worker } = await workerModel.selectWorker({
             limit,

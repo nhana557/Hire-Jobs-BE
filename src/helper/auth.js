@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 
 const generateToken = (payload) =>{
     const verify = {
-        expiresIn: 60 * 60,
+        expiresIn: "2d",
         issuer: 'lihat2'
     }
     const token = jwt.sign(payload, process.env.SECRET_KEY, verify)
@@ -12,7 +12,7 @@ const generateToken = (payload) =>{
 const generateRefreshToken = (payload) =>{
     return new Promise ((resolve, reject) =>{
         const verify = {
-            expiresIn: '2d',
+            expiresIn: '7d',
             issuer: 'hiring'
         }
         jwt.sign(payload, process.env.SECRET_KEY, verify, (err, token) =>{
