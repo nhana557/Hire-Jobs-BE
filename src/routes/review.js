@@ -7,6 +7,5 @@ router
     .get("/", controllerReview.getAllData)
     .post('/', protect, controllerReview.createData)
 
-
 module.exports = router
 

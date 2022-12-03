@@ -13,9 +13,7 @@ const createError = require('http-errors')
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
-app.use(cors({
-  origin: '*'
-}))
+app.use(cors())
 app.use(xss())
 app.use(helmet())
 app.use(morgan('dev'))
