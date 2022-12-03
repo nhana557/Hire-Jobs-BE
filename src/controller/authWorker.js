@@ -51,9 +51,9 @@ const register = async (req, res, next) =>{
           if(emails){
             await create(data)
             //use smpt
-            // commonHelper.response(res, null, "Register Success, check email to Activate account", 201)
+            commonHelper.response(res, null, "Register Success, check email to Activate account", 201)
             // not use smpt
-            commonHelper.response(res, null, "Register Success, please login", 201)
+            // commonHelper.response(res, null, "Register Success, please login", 201)
           }else{
             commonHelper.response(res, null, "Register Success", 201)
 
