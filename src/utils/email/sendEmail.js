@@ -18,7 +18,7 @@ const sendEmail = async (dataEmail) =>{
             service: 'gmail',
             auth: {
                 user: process.env.EMAIL_USER, // generated ethereal user
-                pass: 'taoeqyuovqivguzd' // generated ethereal password
+                pass: process.env.EMAIL_PASS // generated ethereal password
             }
             })
         transporter
